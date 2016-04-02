@@ -2,7 +2,7 @@ package sample.tcp.client;
 
 import akka.actor.*;
 import akka.japi.Procedure;
-import calculator.Ping;
+import model.Ping;
 import scala.concurrent.duration.Duration;
 
 import java.time.Instant;

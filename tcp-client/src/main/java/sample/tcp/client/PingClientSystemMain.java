@@ -4,7 +4,7 @@ package sample.tcp.client;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import calculator.Ping;
+import model.Ping;
 import com.typesafe.config.ConfigFactory;
 import scala.concurrent.duration.Duration;
 
