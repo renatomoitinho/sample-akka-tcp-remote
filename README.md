@@ -42,3 +42,9 @@ Ping Send request ID: 7c77a9fa-35ca-41ea-adea-b477bf340cbf	now: 2016-04-02T13:36
 Received Ping time: 2016-04-02T13:36:54.155	Message Request:PingRequest{now=1459615014150, id='4f0a50d6-c553-4e8a-838f-4c0011153659'} 
 Received Ping time: 2016-04-02T13:36:55.142	Message Request:PingRequest{now=1459615015139, id='01f789d5-8723-4f95-952c-1f75efbdf3d4'} 
 ```
+
+### Tech
+* [akka] - Build powerful concurrent & distributed applications
+more easily
+
+[akka]: <http://akka.io>
