@@ -9,7 +9,6 @@ import com.typesafe.config.ConfigFactory;
 import scala.concurrent.duration.Duration;
 
 import java.util.concurrent.TimeUnit;
-
 public class PingClientSystemMain {
     public static void main(String[] args) throws InterruptedException {
 
