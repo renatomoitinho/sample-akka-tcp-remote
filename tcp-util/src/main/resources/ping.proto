@@ -1,0 +1,14 @@
+package model;
+
+option java_package = "model.proto";
+option java_outer_classname = "Ping";
+
+message PingRequest {
+  required string id = 1;
+  optional int64 now = 2;
+}
+
+message PingResponse {
+    required PingRequest pingRequest = 1;
+    optional int64 latency = 2;
+}
