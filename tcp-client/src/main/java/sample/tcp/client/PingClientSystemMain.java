@@ -24,13 +24,17 @@ public class PingClientSystemMain {
 //                            .build(), ActorRef.noSender());
 //                }, system.dispatcher());
 
-        for(int i=0; i < 10000;i++) {
+        TimeUnit.SECONDS.sleep(5);
+
+        for(int i=0; i < 1000000;i++) {
             actor.tell(Ping.PingRequest.newBuilder()
                     .setId(UUID.randomUUID().toString())
                     .setNow(System.currentTimeMillis())
                     .build(), ActorRef.noSender());
-            TimeUnit.MILLISECONDS.sleep(1);
+         //   TimeUnit.MILLISECONDS.sleep(1);
         }
+
+       // System.out.println("<<<<<<<<< the end >>>>>>>>");
 
     }
 

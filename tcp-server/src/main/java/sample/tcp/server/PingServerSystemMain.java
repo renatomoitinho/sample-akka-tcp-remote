@@ -33,7 +33,7 @@ public class PingServerSystemMain {
         public void onReceive(Object message) {
             if (message instanceof Ping.PingRequest) {
                 Ping.PingRequest request = (Ping.PingRequest) message;
-                System.out.printf("Received Ping time: %s\tMessage Request:%s \n", LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()), request);
+                //System.out.printf("Received Ping time: %s\tMessage Request:%s \n", LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()), request);
 
                 getSender().tell(Ping.PingResponse.newBuilder().setPingRequest(request).setLatency(
                         Duration.between(Instant.ofEpochMilli(request.getNow()), Instant.now()).toMillis()

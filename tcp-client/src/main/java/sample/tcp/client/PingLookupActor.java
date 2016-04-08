@@ -9,11 +9,16 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author renatomoitinhodias@gmail.com
  */
 public class PingLookupActor extends UntypedActor {
+
+    private static final AtomicInteger countRequest = new AtomicInteger(0);
+    private static final AtomicInteger countResponse = new AtomicInteger(0);
+    private static final Instant init = Instant.now();
 
     private final String path;
     private ActorRef calculator = null;
@@ -55,11 +60,17 @@ public class PingLookupActor extends UntypedActor {
     Procedure<Object> active = message -> {
         if (message instanceof Ping.PingRequest) {
             Ping.PingRequest request = (Ping.PingRequest) message;
-            System.out.printf("Ping Send request ID: %s\tnow: %s \t", request.getId(), LocalDateTime.ofInstant(Instant.ofEpochMilli(request.getNow()), ZoneId.systemDefault()));
+           // System.out.printf("[%d] Ping Send request ID: %s\tnow: %s \t",countRequest.getAndIncrement(), request.getId(), LocalDateTime.ofInstant(Instant.ofEpochMilli(request.getNow()), ZoneId.systemDefault()));
             calculator.tell(message, getSelf());
         } else if (message instanceof Ping.PingResponse) {
             Ping.PingResponse result = (Ping.PingResponse) message;
-            System.out.printf("Ping Response ID: %s\tlatency: %d mls\n", result.getPingRequest().getId(), result.getLatency());
+            System.out.printf("[%d]\t", countResponse.incrementAndGet());
+
+            if(countResponse.get() == 1000000) {
+                System.out.printf("\n >>>> %d mls <<<<", System.currentTimeMillis() - init.toEpochMilli());
+                System.exit(1);
+            }
+            // System.out.printf("[%d]Ping Response ID: %s\tlatency: %d mls\n",countResponse.getAndIncrement(), result.getPingRequest().getId(), result.getLatency());
         } else if (message instanceof Terminated) {
             System.out.println("Calculator terminated");
             sendIdentifyRequest();
