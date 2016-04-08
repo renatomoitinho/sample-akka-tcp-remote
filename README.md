@@ -1,4 +1,4 @@
-#sample-akka-tcp-remote
+#sample-akka-tcp-remote (one million messages per minute)
 Example AKKA/IO(2.4.3) TCP remote object 
 
 ## run maven parent and started server and client :]
