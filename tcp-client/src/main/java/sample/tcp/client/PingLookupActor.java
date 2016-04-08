@@ -2,7 +2,7 @@ package sample.tcp.client;
 
 import akka.actor.*;
 import akka.japi.Procedure;
-import model.Ping;
+import model.proto.Ping;
 import scala.concurrent.duration.Duration;
 
 import java.time.Instant;
@@ -53,13 +53,13 @@ public class PingLookupActor extends UntypedActor {
     }
 
     Procedure<Object> active = message -> {
-        if (message instanceof Ping.Request) {
+        if (message instanceof Ping.PingRequest) {
             Ping.PingRequest request = (Ping.PingRequest) message;
             System.out.printf("Ping Send request ID: %s\tnow: %s \t", request.getId(), LocalDateTime.ofInstant(Instant.ofEpochMilli(request.getNow()), ZoneId.systemDefault()));
             calculator.tell(message, getSelf());
         } else if (message instanceof Ping.PingResponse) {
             Ping.PingResponse result = (Ping.PingResponse) message;
-            System.out.printf("Ping Response ID: %s\tlatency: %d mls\n", result.getId(), result.latencyInMillis());
+            System.out.printf("Ping Response ID: %s\tlatency: %d mls\n", result.getPingRequest().getId(), result.getLatency());
         } else if (message instanceof Terminated) {
             System.out.println("Calculator terminated");
             sendIdentifyRequest();
